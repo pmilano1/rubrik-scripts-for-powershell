@@ -2,7 +2,7 @@
 # Name:     register-connector-from-csv.ps1
 # Author:   pmilano1 (Peter J. Milanese)
 # Use case: Register Rubrik Connector Service from CSV (line delmited file) of hostnames
-# Ex: .\register-connector-from-csv.ps1 -rubrik [FDQN|IP Address for Rubrik Cluster] -csv [filename.csv]
+# Ex: .\register-connector-from-csv.ps1 -rubrik_host [FDQN|IP Address for Rubrik Cluster] -csv [filename.csv]
 
 param (
     [string]$rubrik_host = $(Read-Host -Prompt 'Input your Rubrik IP or Hostname'),
@@ -23,7 +23,6 @@ if ($RubrikModuleCheck -eq $null) {
 # Check for Credentials
 $Credential = @()
 $CredentialFile = "$($PSScriptRoot)\.creds\$($rubrik_host).cred"
-write-host $CredentialFile
 try{
   write-host "Credentials found for $($rubrik_host)"
   $Credential = Import-CliXml -Path $CredentialFile
